@@ -1,4 +1,4 @@
-node_modules/
+gitignornode_modules/
 *.css.map
 .DS_Store
 *.log
