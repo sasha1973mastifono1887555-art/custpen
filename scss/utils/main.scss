@@ -1,5 +1,6 @@
-@import 'constanta';
-@import 'reset';
+@import './constanta.scss';
+@import './reset.scss';
+@import '../utils/constanta.scss';
 
 body {
     font-family: $font-family-primary;

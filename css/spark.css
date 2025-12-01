@@ -94,7 +94,8 @@ body {
 .orders-section h2 {
   color: #3498db;
   margin-bottom: 32px;
-  text-align: center;
+  text-align: right;
+  background: red;
 }
 
 .orders-list {
