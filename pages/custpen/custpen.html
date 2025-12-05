@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CUSTPEN - Артисты</title>
    <link rel="stylesheet" href="../../css/utils/main.css" />
     <link rel="stylesheet" href="../../css/pages/custpen.css" />
@@ -16,11 +16,62 @@
                 <a href="../pages/projects/projects.html" class="nav-link">Главная</a>
             </nav>
         </header>
-        
-        <main class="main">
-            <h2>Страница артистов в разработке</h2>
-            <p>Здесь будет список артистов</p>
+
+        <main class="main-grid">
+            <div class="editor-wrap">
+                <div class="panels">
+                    <div class="panel">
+                        <div class="head">
+                            <div class="dot html"></div>
+                            <div class="title">HTML</div>
+                        </div>
+                        <div class="content">
+                            <div class="code-wrapper">
+                                <div class="line-numbers" id="html-numbers">1</div>
+                                <textarea id="html-code" class="code-editor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="head">
+                            <div class="dot css"></div>
+                            <div class="title">CSS</div>
+                        </div>
+                        <div class="content">
+                            <div class="code-wrapper">
+                                <div class="line-numbers" id="css-numbers">1</div>
+                                <textarea id="css-code" class="code-editor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="head">
+                            <div class="dot js"></div>
+                            <div class="title">JS</div>
+                        </div>
+                        <div class="content">
+                            <div class="code-wrapper">
+                                <div class="line-numbers" id="js-numbers">1</div>
+                                <textarea id="js-code" class="code-editor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section">
+                    <div class="preview-header">
+                        <div class="preview-title">Результат</div>
+                    </div>
+                    <div class="preview-content">
+                        <iframe id="preview-frame"></iframe>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
+
+    <script src="../custpen/custren.js"></script>
 </body>
 </html>
