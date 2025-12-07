@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Library loaded');
-    
     const menuData = {
-        html: ['Теги', 'Атрибуты', 'Формы', 'Семантика', 'Таблицы', 'Медиа', 'Метаданные', 'Списки', 'Ссылки', 'Текст', 'Контейнеры', 'Встроенные', 'Скрипты', 'Устаревшие', 'Атрибуты'],
-        css: ['Селекторы', 'Свойства', 'Значения', 'Единицы', 'Блочная модель', 'Position', 'Display', 'Flexbox', 'Grid', 'Анимация', 'Transition', 'Transform', 'Media', 'Псевдоклассы', 'Переменные'],
-        js: ['Переменные', 'Функции', 'Объекты', 'Массивы', 'Циклы', 'Условия', 'DOM', 'События', 'ES6+', 'Промисы', 'Async/Await', 'Классы', 'Модули', 'API', 'Отладка'],
-        tools: ['Git', 'NPM', 'Webpack', 'VS Code', 'Chrome DevTools', 'Figma', 'Терминал', 'Препроцессоры', 'Линтеры', 'Тестирование', 'Деплой', 'Производительность', 'Безопасность', 'SEO']
+        html: ['Теги','Атрибуты','Формы','Семантика','Таблицы','Медиа','Метаданные','Списки','Ссылки','Текст','Контейнеры','Встроенные','Скрипты','Устаревшие'],
+        css: ['Селекторы','Свойства','Значения','Единицы','Блочная модель','Position','Display','Flexbox','Grid','Анимация','Transition','Transform','Media','Псевдоклассы','Переменные'],
+        js: ['Переменные','Функции','Объекты','Массивы','Циклы','Условия','DOM','События','ES6+','Промисы','Async/Await','Классы','Модули','API','Отладка'],
+        tools: ['Git','NPM','Webpack','VS Code','Chrome DevTools','Figma','Терминал','Препроцессоры','Линтеры','Тестирование','Деплой','Производительность','Безопасность','SEO']
     };
 
     const contentData = {
@@ -16,99 +14,90 @@ document.addEventListener('DOMContentLoaded', () => {
         'Git': 'git init, commit, push, pull, branch'
     };
 
-    const sidebar = document.getElementById('sidebarPanel');
-    const sidebarContent = document.querySelector('.sidebar-content');
-    const contentTitle = document.getElementById('contentTitle');
-    const contentDisplay = document.getElementById('contentDisplay');
-    const mainContainer = document.querySelector('.container');
+    const codeExamples = {
+        'Теги': '&lt;div class="container"&gt;\n  &lt;h1&gt;Заголовок&lt;/h1&gt;\n&lt;/div&gt;',
+        'Селекторы': '.class {\n  color: blue;\n}',
+        'Переменные': 'let x = 10;\nconst y = 20;',
+        'Git': 'git add .\ngit commit -m "message"'
+    };
+
+    const el = {
+        s: document.getElementById('sidebarPanel'),
+        sc: document.querySelector('.sidebar-content'),
+        ct: document.getElementById('contentTitle'),
+        cd: document.getElementById('contentDisplay'),
+        mc: document.querySelector('.container')
+    };
 
     function createMenu() {
-        if (!sidebarContent) return;
+        if (!el.sc) return;
         
-        const title = sidebarContent.querySelector('.sidebar-title');
-        sidebarContent.innerHTML = '';
-        if (title) sidebarContent.appendChild(title);
-
-        Object.entries(menuData).forEach(([category, items]) => {
-            const categoryDiv = document.createElement('div');
-            categoryDiv.className = 'category';
-            const categoryBtn = document.createElement('button');
-            categoryBtn.className = 'category-btn';
-            categoryBtn.innerHTML = `
-                <span>${category}</span>
-                <span>▶</span>
-            `;
+        const title = el.sc.querySelector('.sidebar-title');
+        el.sc.innerHTML = title ? title.outerHTML : '';
+        
+        for (const [cat, items] of Object.entries(menuData)) {
+            const div = document.createElement('div');
+            div.className = 'category';
             
-            const sublist = document.createElement('div');
-            sublist.className = 'sublist';
+            const btn = document.createElement('button');
+            btn.className = 'category-btn';
+            btn.innerHTML = `<span>${cat}</span><span>▶</span>`;
             
-            items.forEach(item => {
-                const itemBtn = document.createElement('button');
-                itemBtn.className = 'item-btn';
-                itemBtn.textContent = item;
-                itemBtn.onclick = () => showContent(item);
-                sublist.appendChild(itemBtn);
+            const sub = document.createElement('div');
+            sub.className = 'sublist';
+            
+            items.forEach(it => {
+                const b = document.createElement('button');
+                b.className = 'item-btn';
+                b.textContent = it;
+                b.onclick = () => showContent(it);
+                sub.appendChild(b);
             });
             
-            categoryBtn.onclick = () => {
-                const isActive = categoryBtn.classList.toggle('active');
-                sublist.classList.toggle('active', isActive);
-                categoryBtn.querySelector('span:last-child').textContent = isActive ? '▼' : '▶';
+            btn.onclick = () => {
+                const a = btn.classList.toggle('active');
+                sub.classList.toggle('active', a);
+                btn.querySelector('span:last-child').textContent = a ? '▼' : '▶';
             };
             
-            categoryDiv.appendChild(categoryBtn);
-            categoryDiv.appendChild(sublist);
-            sidebarContent.appendChild(categoryDiv);
-        });
-        setTimeout(() => sidebarContent.querySelector('.category-btn')?.click(), 100);
+            div.append(btn, sub);
+            el.sc.appendChild(div);
+        }
+        
+        setTimeout(() => el.sc.querySelector('.category-btn')?.click(), 100);
     }
 
     function showContent(item) {
-        if (!contentTitle || !contentDisplay) return;
+        if (!el.ct || !el.cd) return;
         
-        contentTitle.textContent = item;
-        contentDisplay.innerHTML = `
+        el.ct.textContent = item;
+        el.cd.innerHTML = `
             <div class="content-card">
                 <h3>${item}</h3>
                 <p>${contentData[item] || 'Описание для этого раздела'}</p>
                 <div class="code-example">
                     <h4>Пример кода:</h4>
-                    <pre><code>${getCodeExample(item)}</code></pre>
+                    <pre><code>${codeExamples[item] || '// Пример кода'}</code></pre>
                 </div>
                 <div class="actions">
-                    <button onclick="saveItem('${item}')">💾 Сохранить</button>
-                    <button onclick="copyText('${item}', '${contentData[item] || ''}')">📋 Копировать</button>
+                    <button onclick="alert('Сохранено: ${item}')">💾 Сохранить</button>
+                    <button onclick="navigator.clipboard.writeText('${item}\\n${contentData[item] || ''}').then(()=>alert('Скопировано!'))">📋 Копировать</button>
                 </div>
             </div>
         `;
         
-        document.querySelectorAll('.item-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.textContent === item);
+        document.querySelectorAll('.item-btn').forEach(b => {
+            b.classList.toggle('active', b.textContent === item);
         });
     }
 
-    function getCodeExample(item) {
-        const examples = {
-            'Теги': '&lt;div class="container"&gt;\n  &lt;h1&gt;Заголовок&lt;/h1&gt;\n&lt;/div&gt;',
-            'Селекторы': '.class {\n  color: blue;\n}',
-            'Переменные': 'let x = 10;\nconst y = 20;',
-            'Git': 'git add .\ngit commit -m "message"'
-        };
-        return examples[item] || '// Пример кода';
-    }
-    window.saveItem = (item) => alert(`Сохранено: ${item}`);
-    window.copyText = (title, content) => {
-        navigator.clipboard.writeText(`${title}\n${content}`)
-            .then(() => alert('Скопировано!'));
-    };
-
     createMenu();
-    if (sidebar) sidebar.classList.add('open');
-    if (mainContainer) mainContainer.classList.add('sidebar-open');
+    if (el.s) el.s.classList.add('open');
+    if (el.mc) el.mc.classList.add('sidebar-open');
     
     window.addEventListener('resize', () => {
-        const isMobile = window.innerWidth <= 768;
-        if (sidebar) sidebar.classList.toggle('open', !isMobile);
-        if (mainContainer) mainContainer.classList.toggle('sidebar-open', !isMobile);
+        const m = window.innerWidth <= 768;
+        if (el.s) el.s.classList.toggle('open', !m);
+        if (el.mc) el.mc.classList.toggle('sidebar-open', !m);
     });
 });

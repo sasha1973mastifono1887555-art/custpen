@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --primary: #3498db;
   --secondary: #2ecc71;
@@ -232,6 +233,7 @@ body {
   border-color: var(--border);
 }
 
+/* ===== КАТЕГОРИИ МЕНЮ ===== */
 .category {
   margin: 8px 0;
 }
@@ -267,7 +269,7 @@ body {
   padding-left: 10px;
 }
 .sublist.active {
-  max-height: 500px;
+  max-height: fit-content;
 }
 
 .item-btn {
@@ -295,6 +297,7 @@ body {
   background: rgb(33.1380753138, 125.1882845188, 186.8619246862);
 }
 
+/* ===== БОКОВАЯ ПАНЕЛЬ ===== */
 .sidebar-panel {
   position: fixed;
   left: 0;
@@ -321,6 +324,7 @@ body {
   font-size: 1.5rem;
 }
 
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
 .container {
   transition: margin-left 0.3s ease;
   min-height: 100vh;
@@ -329,6 +333,7 @@ body {
   margin-left: 300px;
 }
 
+/* ===== КОНТЕНТ ===== */
 .content-area {
   padding: 20px;
 }
@@ -404,6 +409,51 @@ body {
   margin-bottom: 10px;
 }
 
+/* ===== ФОРМА ПОДКЛЮЧЕНИЯ ===== */
+.connect-form {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+.connect-form h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+.connect-form .form-group {
+  margin-bottom: 15px;
+}
+.connect-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.connect-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.connect-form .form-group input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+.connect-form .btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.connect-form .btn:hover {
+  background: rgb(33.1380753138, 125.1882845188, 186.8619246862);
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
   .sidebar-panel {
     width: 100%;
